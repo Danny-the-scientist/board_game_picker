@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="System"?>
+<database>
+    <name>ExampleDB</name>
+    <table>
+        <database></database>
+        <name>category</name>
+        <ddl>CREATE TABLE category (game_id INTEGER REFERENCES game_list (game_id) ON UPDATE CASCADE, category_name VARCHAR)</ddl>
+        <columns>
+            <column>
+                <name>game_id</name>
+                <type>INTEGER</type>
+                <constraints>
+                    <constraint>
+                        <type>FOREIGN KEY</type>
+                        <definition>REFERENCES game_list (game_id) ON UPDATE CASCADE</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>category_name</name>
+                <type>VARCHAR</type>
+            </column>
+        </columns>
+        <rows>
+        </rows>
+    </table>
+    <table>
+        <database></database>
+        <name>designer</name>
+        <ddl>CREATE TABLE designer (game_id INTEGER REFERENCES game_list (game_id) ON UPDATE CASCADE, designer_name VARCHAR)</ddl>
+        <columns>
+            <column>
+                <name>game_id</name>
+                <type>INTEGER</type>
+                <constraints>
+                    <constraint>
+                        <type>FOREIGN KEY</type>
+                        <definition>REFERENCES game_list (game_id) ON UPDATE CASCADE</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>designer_name</name>
+                <type>VARCHAR</type>
+            </column>
+        </columns>
+        <rows>
+        </rows>
+    </table>
+    <table>
+        <database></database>
+        <name>expansions</name>
+        <ddl>CREATE TABLE expansions (expansion_id INTEGER PRIMARY KEY UNIQUE, bgg_object_id INTEGER, game_id INTEGER REFERENCES game_list (game_id) ON UPDATE CASCADE, expansion_name VARCHAR UNIQUE, year_released INTEGER, personal_rating INTEGER, bgg_rating DOUBLE, bgg_complexity DOUBLE, playtime_min INTEGER, playtime_max INTEGER, player_min INTEGER, player_max INTEGER, age_min INTEGER, player_best_min INTEGER, player_best_max INTEGER, language_requirement TEXT, tiny_url VARCHAR UNIQUE, affiliate_url VARCHAR UNIQUE, own BOOLEAN)</ddl>
+        <columns>
+            <column>
+                <name>expansion_id</name>
+                <type>INTEGER</type>
+                <constraints>
+                    <constraint>
+                        <type>PRIMARY KEY</type>
+                        <definition>PRIMARY KEY </definition>
+                    </constraint>
+                    <constraint>
+                        <type>UNIQUE</type>
+                        <definition>UNIQUE</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>bgg_object_id</name>
+                <type>INTEGER</type>
+            </column>
+            <column>
+                <name>game_id</name>
+                <type>INTEGER</type>
+                <constraints>
+                    <constraint>
+                        <type>FOREIGN KEY</type>
+                        <definition>REFERENCES game_list (game_id) ON UPDATE CASCADE</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>expansion_name</name>
+                <type>VARCHAR</type>
+                <constraints>
+                    <constraint>
+                        <type>UNIQUE</type>
+                        <definition>UNIQUE</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>year_released</name>
+                <type>INTEGER</type>
+            </column>
+            <column>
+                <name>personal_rating</name>
+                <type>INTEGER</type>
+            </column>
+            <column>
+                <name>bgg_rating</name>
+                <type>DOUBLE</type>
+            </column>
+            <column>
+                <name>bgg_complexity</name>
+                <type>DOUBLE</type>
+            </column>
+            <column>
+                <name>playtime_min</name>
+                <type>INTEGER</type>
+            </column>
+            <column>
+                <name>playtime_max</name>
+                <type>INTEGER</type>
+            </column>
+            <column>
+                <name>player_min</name>
+                <type>INTEGER</type>
+            </column>
+            <column>
+                <name>player_max</name>
+                <type>INTEGER</type>
+            </column>
+            <column>
+                <name>age_min</name>
+                <type>INTEGER</type>
+            </column>
+            <column>
+                <name>player_best_min</name>
+                <type>INTEGER</type>
+            </column>
+            <column>
+                <name>player_best_max</name>
+                <type>INTEGER</type>
+            </column>
+            <column>
+                <name>language_requirement</name>
+                <type>TEXT</type>
+            </column>
+            <column>
+                <name>tiny_url</name>
+                <type>VARCHAR</type>
+                <constraints>
+                    <constraint>
+                        <type>UNIQUE</type>
+                        <definition>UNIQUE</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>affiliate_url</name>
+                <type>VARCHAR</type>
+                <constraints>
+                    <constraint>
+                        <type>UNIQUE</type>
+                        <definition>UNIQUE</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>own</name>
+                <type>BOOLEAN</type>
+            </column>
+        </columns>
+        <rows>
+        </rows>
+    </table>
+    <table>
+        <database></database>
+        <name>game_list</name>
+        <ddl>CREATE TABLE game_list (game_id INTEGER PRIMARY KEY UNIQUE NOT NULL, bgg_object_id INTEGER UNIQUE NOT NULL, name VARCHAR NOT NULL, edition_release INTEGER, year_released INTEGER, personal_rating INTEGER, bgg_rating DOUBLE, bgg_complexity DOUBLE, playtime_min INTEGER, playtime_max INTEGER, age_min INTEGER, player_min INTEGER, player_max INTEGER, player_rec_min INTEGER, player_rec_max INTEGER, language_requirement TEXT, reprint BOOLEAN, tiny_url VARCHAR UNIQUE, affiliate_url VARCHAR UNIQUE, own BOOLEAN, UNIQUE (name, year_released))</ddl>
+        <columns>
+            <column>
+                <name>game_id</name>
+                <type>INTEGER</type>
+                <constraints>
+                    <constraint>
+                        <type>PRIMARY KEY</type>
+                        <definition>PRIMARY KEY </definition>
+                    </constraint>
+                    <constraint>
+                        <type>UNIQUE</type>
+                        <definition>UNIQUE </definition>
+                    </constraint>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>NOT NULL</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>bgg_object_id</name>
+                <type>INTEGER</type>
+                <constraints>
+                    <constraint>
+                        <type>UNIQUE</type>
+                        <definition>UNIQUE </definition>
+                    </constraint>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>NOT NULL</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>name</name>
+                <type>VARCHAR</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>NOT NULL</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>edition_release</name>
+                <type>INTEGER</type>
+            </column>
+            <column>
+                <name>year_released</name>
+                <type>INTEGER</type>
+            </column>
+            <column>
+                <name>personal_rating</name>
+                <type>INTEGER</type>
+            </column>
+            <column>
+                <name>bgg_rating</name>
+                <type>DOUBLE</type>
+            </column>
+            <column>
+                <name>bgg_complexity</name>
+                <type>DOUBLE</type>
+            </column>
+            <column>
+                <name>playtime_min</name>
+                <type>INTEGER</type>
+            </column>
+            <column>
+                <name>playtime_max</name>
+                <type>INTEGER</type>
+            </column>
+            <column>
+                <name>age_min</name>
+                <type>INTEGER</type>
+            </column>
+            <column>
+                <name>player_min</name>
+                <type>INTEGER</type>
+            </column>
+            <column>
+                <name>player_max</name>
+                <type>INTEGER</type>
+            </column>
+            <column>
+                <name>player_rec_min</name>
+                <type>INTEGER</type>
+            </column>
+            <column>
+                <name>player_rec_max</name>
+                <type>INTEGER</type>
+            </column>
+            <column>
+                <name>language_requirement</name>
+                <type>TEXT</type>
+            </column>
+            <column>
+                <name>reprint</name>
+                <type>BOOLEAN</type>
+            </column>
+            <column>
+                <name>tiny_url</name>
+                <type>VARCHAR</type>
+                <constraints>
+                    <constraint>
+                        <type>UNIQUE</type>
+                        <definition>UNIQUE</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>affiliate_url</name>
+                <type>VARCHAR</type>
+                <constraints>
+                    <constraint>
+                        <type>UNIQUE</type>
+                        <definition>UNIQUE</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>own</name>
+                <type>BOOLEAN</type>
+            </column>
+        </columns>
+        <constraints>
+            <constraint>
+                <type>UNIQUE</type>
+                <definition>UNIQUE (name, year_released)</definition>
+            </constraint>
+        </constraints>
+        <rows>
+        </rows>
+    </table>
+    <table>
+        <database></database>
+        <name>mechanics</name>
+        <ddl>CREATE TABLE mechanics (game_id INTEGER REFERENCES game_list (game_id) ON UPDATE CASCADE, mechanics_name VARCHAR, CONSTRAINT unique_set UNIQUE (game_id, mechanics_name))</ddl>
+        <columns>
+            <column>
+                <name>game_id</name>
+                <type>INTEGER</type>
+                <constraints>
+                    <constraint>
+                        <type>FOREIGN KEY</type>
+                        <definition>REFERENCES game_list (game_id) ON UPDATE CASCADE</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>mechanics_name</name>
+                <type>VARCHAR</type>
+            </column>
+        </columns>
+        <constraints>
+            <constraint>
+                <type>UNIQUE</type>
+                <definition>UNIQUE (game_id, mechanics_name)</definition>
+            </constraint>
+        </constraints>
+        <rows>
+        </rows>
+    </table>
+    <table>
+        <database></database>
+        <name>publisher</name>
+        <ddl>CREATE TABLE publisher (game_id INTEGER NOT NULL REFERENCES game_list (game_id), publisher_name VARCHAR)</ddl>
+        <columns>
+            <column>
+                <name>game_id</name>
+                <type>INTEGER</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>NOT NULL </definition>
+                    </constraint>
+                    <constraint>
+                        <type>FOREIGN KEY</type>
+                        <definition>REFERENCES game_list (game_id)</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>publisher_name</name>
+                <type>VARCHAR</type>
+            </column>
+        </columns>
+        <rows>
+        </rows>
+    </table>
+</database>
