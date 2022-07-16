@@ -3,7 +3,7 @@ import streamlit as st
 
 @st.cache(allow_output_mutation=True)
 def get_all_games_json():
-    bg_connection = sqlite3.connect("../Playground.db", check_same_thread=False)
+    bg_connection = sqlite3.connect("YOUR-DB-PATH-HERE", check_same_thread=False)
     bg_connection.row_factory = sqlite3.Row
     bg_cursor = bg_connection.cursor()
     
