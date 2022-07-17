@@ -71,6 +71,13 @@ if st.button("Danny's Favorite!"):
 
 
 st.write('#')
+st.header('Search for a game:')
+search_input = st.text_input('Type part of a game name and press enter')
+if search_input:
+    search_result = sql_pull.get_search_game(search_input)
+    result_df = pd.DataFrame(search_result)
+    result_final = result_df.rename(columns={col: "Game Name" for col in result_df})
+    st.table(result_final)
 
 st.header('Categories')
 picked_cats = st.multiselect('', cats)
