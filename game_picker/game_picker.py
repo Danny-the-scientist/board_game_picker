@@ -1,6 +1,7 @@
 """Original coding by Daniel (Danny) C
 Git: danny-the-scientist"""
 
+from email import header
 import streamlit as st
 import pandas as pd
 import sql_pull
@@ -13,7 +14,6 @@ pubs = data_handle.get_unique_publisher()
 designers = data_handle.get_unique_designer()
 game_names = sql_pull.get_game_names_list()
 all_game_info = pd.DataFrame(sql_pull.get_all_games_json())
-
 game_names_df = pd.DataFrame({"Game Name": game_names})
 all_game_info_df = pd.DataFrame(all_game_info)
 
@@ -46,7 +46,8 @@ else:
     min_play = st.sidebar.slider('Min number of players', 0, 10, 0)
     max_play = st.sidebar.slider('Max number of players', 0, 40, 0)
 
-min_age = st.sidebar.slider('Minimum Recommended Age', 0, 18, 0)
+reccomended_age = st.sidebar.checkbox('Use BGG recommended player minimum age?')
+min_age = st.sidebar.slider('Minimum Age', 0, 18, 0)
 min_time = st.sidebar.slider('Minimum Time (Minutes)', 0, 600, 0)
 max_time = st.sidebar.slider('Maximum Time (Minutes)', 0, 600, 0)
 bgg_rating_min = st.sidebar.slider('BoardGameGeek Avg Rating Min',0.0, 10.0, 0.0)
@@ -69,7 +70,6 @@ if st.button("Danny's Favorite!"):
     st.write('###')
     st.subheader("Cosmic Encounter!! Enjoy!")
 
-
 st.write('#')
 st.header('Search for a game:')
 search_input = st.text_input('Type part of a game name and press enter')
@@ -78,6 +78,8 @@ if search_input:
     result_df = pd.DataFrame(search_result)
     result_final = result_df.rename(columns={col: "Game Name" for col in result_df})
     st.table(result_final)
+
+st.write("#")
 
 st.header('Categories')
 picked_cats = st.multiselect('', cats)
@@ -97,6 +99,7 @@ group_number,
 min_play,
 max_play,
 reccomended_play,
+reccomended_age,
 min_age,
 min_time,
 max_time,
@@ -137,4 +140,4 @@ view_full = st.checkbox('View full game list')
 if view_full:
     st.header('All games:')
     st.table(game_names_df)
-
+    
