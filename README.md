@@ -1,5 +1,5 @@
 # Board Game Picker
-A python-coded app allowing you to narrow down your board game collection choices for a game night. Good times.
+A python-coded app allowing you populate a local database of your collection and narrow down your choices for a game night. Good times.
 
 ## Premise
 
