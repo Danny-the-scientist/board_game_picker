@@ -1,5 +1,6 @@
 import sql_pull
-import pandas
+import pandas as pd
+from typing import AnyStr
 
 def get_unique_mech():
     mechs = sql_pull.get_mechanics_json()
@@ -43,6 +44,7 @@ group_number,
 min_play,
 max_play,
 reccomended_play,
+reccomended_age,
 min_age,
 min_time,
 max_time,
@@ -56,6 +58,8 @@ picked_design,
 picked_pubs):
 
     fg = all_game_info_df
+    final_keep = sql_pull.get_game_id_list()
+
     if reccomended_play:
         if group_size:
             fg.drop(fg[fg.player_rec_min > group_number].index, inplace=True)
@@ -74,8 +78,14 @@ picked_pubs):
         if max_play != 0:
             fg.drop(fg[fg.player_max > max_play].index, inplace=True)
     
-    if min_age != 0:
-        fg.drop(fg[fg.age_min < min_age].index, inplace=True)
+    if reccomended_age:
+        if min_age != 0:
+            fg.drop(fg[fg.rec_age_min < min_age].index, inplace=True)
+            fg.dropna(subset=['rec_age_min'], inplace=True)
+    else:
+        if min_age != 0:
+            fg.drop(fg[fg.pub_age_min < min_age].index, inplace=True)
+            fg.dropna(subset=['pub_age_min'], inplace=True)           
     
     if min_time != 0:
         fg.drop(fg[fg.playtime_min < min_time].index, inplace=True)
@@ -94,18 +104,44 @@ picked_pubs):
     
     if picked_cats:
         for cat in picked_cats:
-            fg.drop(fg[fg.category_name != cat].index, inplace=True)
+            cat_new = []
+            new_select = fg.loc[fg['category_name'] == cat]
+            for index, row in new_select.iterrows():
+                cat_new.append(row['game_id'])
+            final_keep = set(final_keep) & set(cat_new)
     
     if picked_mechs:
         for mech in picked_mechs:
-            fg.drop(fg[fg.mechanics_name != mech].index, inplace=True)
+            mech_new = []
+            new_select = fg.loc[fg['mechanics_name'] == mech]
+            for index, row in new_select.iterrows():
+                mech_new.append(row['game_id'])
+            final_keep = set(final_keep) & set(mech_new)
     
     if picked_design:
         for designer in picked_design:
-            fg.drop(fg[fg.designer_name != designer].index, inplace=True)
+            des_new = []
+            new_select = fg.loc[fg['designer_name'] == designer]
+            for index, row in new_select.iterrows():
+                des_new.append(row['game_id'])
+            final_keep = set(final_keep) & set(des_new)
 
     if picked_pubs:
         for pub in picked_pubs:
-            fg.drop(fg[fg.publisher_name != pub].index, inplace=True)
+            pub_new = []
+            new_select = fg.loc[fg['publisher_name'] == pub]
+            for index, row in new_select.iterrows():
+                pub_new.append(row['game_id'])
+            final_keep = set(final_keep) & set(pub_new)
 
-    return fg
+    if final_keep:
+        new_fg = pd.DataFrame(columns=fg.columns)
+        for game in final_keep:
+            matched_game = fg.loc[fg.game_id == game]
+            new_fg = new_fg.append(matched_game)
+        return new_fg
+    elif picked_cats or picked_design or picked_mechs or picked_pubs:
+        fg_none = pd.DataFrame(columns=fg.columns)
+        return fg_none
+    else:
+        return fg
