@@ -3,7 +3,7 @@ A python-coded app allowing you populate a local database of your collection and
 
 ## Premise
 
-An SQLite DB (blank example included) containing a user's board game collection information (exportable from [BoardGameGeek](http://boardgamegeek.com/)) in several tables:
+An SQLite DB (empty XML creation example included) containing a user's board game collection information (exportable from [BoardGameGeek](http://boardgamegeek.com/)) in several tables:
 1. Game List - basic information displayed on the BGG header
 2. Expansions - tagged, and therefore stored, separately from the main games
 3. Ancillary tables - mechanics, categories, etc., which must be obtained through the BGG API
