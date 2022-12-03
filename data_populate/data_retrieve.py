@@ -9,7 +9,7 @@ NEW_GAME_ID = 1
 NEW_EXPANSION_ID = 1
 
 def pull_current_bgg():
-    my_api = requests.get(f"{API_BASE}/collection/DannyCGaming?own=1")
+    my_api = requests.get(f"{API_BASE}/collection/YOUR_USER_HERE?own=1")
     collection_root = ElementTree.fromstring(my_api.content)
     item_tag = collection_root.findall('./item')
     current_games = []
