@@ -18,18 +18,21 @@ After this DB is populated, running the `streamlit` app will allow you to random
 
 ## Usage
 
-First, ensure that your DB path is specified in both `data_pull/sql_tasks.py` and `game_picker/sql_pull.py`
+First, ensure that your DB path is specified in both `data_populate/sql_tasks.py` and `game_picker/sql_pull.py` and you fill out your BGG username in `data_populate/data_retrieve.py`.
 
-### Filling out auxiliary tables
+### Filling out the tables
 
-Only the main `games_list` table needs to be populated (currently) for the remainder of the module to function. `game_id` needs to be a unique key tracking individual games inside the DB
+The `data_populate` folder serves two functions relating to the database filling:
+
+1. Compare your current BGG game list to what's in the database, retrieve base information on any missing, assigning them sequential IDs in SQLite
+2. Populate category, designer, etc. tables based on the XML from BGG
 
 ```bash
-cd game-works/data_pull
+cd game-works/data_populate
 python3 main.py
 ```
 
-This will (eventally) populate the auxiliary tables with mechanics, categories, etc. A `sleep` function is included to not overwhelm the BGG API
+This will populate the auxiliary tables with mechanics, categories, etc. A `sleep` function is included to not overwhelm the BGG API
 
 ### Running the app
 
