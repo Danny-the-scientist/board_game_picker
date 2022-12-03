@@ -1,7 +1,7 @@
 import sqlite3
 import streamlit as st
 
-BG_CONNECTION = sqlite3.connect("C:\Databases\Playground.db", check_same_thread=False)
+BG_CONNECTION = sqlite3.connect("YOUR DATABASE PATH HERE", check_same_thread=False)
 BG_CONNECTION.row_factory = sqlite3.Row
 BG_CURSOR = BG_CONNECTION.cursor()
 
