@@ -3,18 +3,17 @@ A python-coded app allowing you populate a local database of your collection and
 
 ## Premise
 
-An SQLite DB (blank example included) containing a board game collection of information (exportable from [BoardGameGeek](http://boardgamegeek.com/) in several tables:
+An SQLite DB (blank example included) containing a user's board game collection information (exportable from [BoardGameGeek](http://boardgamegeek.com/)) in several tables:
 1. Game List - basic information displayed on the BGG header
 2. Expansions - tagged, and therefore stored, separately from the main games
 3. Ancillary tables - mechanics, categories, etc., which must be obtained through the BGG API
 
-After this DB is populated, running the `streamlit` app will allow you to randomly pick and/or specifically narrow down choices fitting specific criteria.
+After this DB is populated, running the `streamlit` app will allow you to randomly pick and/or narrow down choices fitting specific criteria.
 
 ## Required installed packages
 
-1. `sqlite3`
-2. `pandas`
-3. `streamlit`
+1. `pandas`
+2. `streamlit`
 
 ## Usage
 
