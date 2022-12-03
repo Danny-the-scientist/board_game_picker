@@ -1,7 +1,7 @@
 import sqlite3
 from typing import (List, Dict)
 
-BG_CONNECTION = sqlite3.connect("C:\Databases\Playground.db")
+BG_CONNECTION = sqlite3.connect("YOUR DATABASE PATH")
 BG_CURSOR = BG_CONNECTION.cursor()
 
 
