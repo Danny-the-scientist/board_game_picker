@@ -15,6 +15,8 @@ After this DB is populated, running the `streamlit` app will allow you to random
 1. `pandas`
 2. `streamlit`
 
+Other packages (`sqlite3`, `xml`, `requests`, etc.) should be part of the standard python library, but may be `pip install`ed if needed.
+
 ## Usage
 
 First, ensure that your DB path is specified in both `data_populate/sql_tasks.py` and `game_picker/sql_pull.py` and you fill out your BGG username in `data_populate/data_retrieve.py`.
