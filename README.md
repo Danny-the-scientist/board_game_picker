@@ -33,11 +33,11 @@ cd game-works/data_populate
 python3 main.py
 ```
 
-This will populate the auxiliary tables with mechanics, categories, etc. A `sleep` function is included to not overwhelm the BGG API
+This will populate the main and auxiliary tables with mechanics, categories, etc. A `sleep` function is included to not overwhelm the BGG API
 
 ### Running the app
 
-Locally running the picker app just involves activating streamlit - this will warm the cache on first go and allow the app to be network-accessible. For now, you can see some of my own stuff!
+Locally running the picker app just involves activating streamlit - this will warm the cache on first go and allow the app to be network-accessible.
 
 ```bash
 cd game-works/game_picker
